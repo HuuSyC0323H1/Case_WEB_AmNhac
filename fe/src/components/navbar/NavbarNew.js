@@ -1,5 +1,3 @@
-import ImaIcon3 from '../../assets/images/muanho.png'
-import ImaIcon5 from '../../assets/images/logo-64x64.png'
 import './css.css'
 import React from "react";
 import {Link, useNavigate} from "react-router-dom";
@@ -8,6 +6,7 @@ import {useAuth} from "../../context/authContext";
 export default function NavbarNew() {
     const {isLoggedIn, logout} = useAuth();
     const navigate = useNavigate();
+
     const handleLogOut = async () => {
         await logout();
         navigate('/login')
@@ -24,7 +23,7 @@ export default function NavbarNew() {
                     <i className="bi bi-music-note-list"></i>
                 </div>
                 <div className="mobile__heading--logo">
-                    <img src={ImaIcon3} alt="Zing MP3"/>
+                    <img  alt="Zing MP3"/>
                 </div>
                 <div className="search__container">
                     <div className="search-btn">
@@ -44,11 +43,11 @@ export default function NavbarNew() {
             <div className="song-side__heading--user dropdown">
                 {isLoggedIn ? (
                     <div className="dropdown">
-                        <img className="dropdown-toggle" data-bs-toggle="dropdown" src={ImaIcon5} alt=""/>
+                        <img className="dropdown-toggle" data-bs-toggle="dropdown" alt=""/>
                         <div className="dropdown-menu user-dropdown">
                             <Link to='/user' role="button" tabIndex="0">
                                 <div className="user-info">
-                                    <img src={ImaIcon5} alt=""/>
+                                    <img alt=""/>
                                     <span className="user-name" dir="auto">
                                         Hữu Sỹ
                                     </span>

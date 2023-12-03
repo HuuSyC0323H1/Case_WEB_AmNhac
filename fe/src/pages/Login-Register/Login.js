@@ -5,13 +5,14 @@ import Weather from './Weather';
 
 import Img from '../../assets/images/logoNew.svg';
 import './css/auth.css';
+import LoginButton from "../../context/KeyPress";
 
 export default function Login() {
     const [loginData, setLoginData] = useState({ userName: '', password: '' });
-    const {isLoggedIn} = useAuth();
+    const {response} = useAuth();
     const [passwordError, setPasswordError] = useState('');
     const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+    const { isLoggedIn,login } = useContext(AuthContext);
 
     const handleValidation = (e) => {
         if (e.target.name === 'password') {
@@ -54,7 +55,7 @@ export default function Login() {
         try {
             await login(loginData);
             if (isLoggedIn){
-                navigate('/')
+                navigate("/")
             }else {
                 setPasswordError("Invalid username or password")
             }
@@ -106,7 +107,7 @@ export default function Login() {
                                                 handleValidation(e);
                                             }}
                                         />
-                                        {passwordError && <div className="invalid-feedback" style={{fontSize:"16px"}}>{passwordError}</div>}
+                                        {passwordError && <div className="invalid-feedback" style={{fontSize:"16px", color:"red"}}>{passwordError}</div>}
                                     </div>
                                 </div>
                                 <div className="col-md-12 mb-3">
@@ -123,13 +124,7 @@ export default function Login() {
                                         <span className="material-control-description">Remember Me</span>
                                     </label>
                                 </div>
-                                <div className="col-md-6 text-right">
-                                    <div className="form-group">
-                                        <button type="button" className="btn btn-primary sign-up" onClick={handleLogin}>
-                                            Sign In
-                                        </button>
-                                    </div>
-                                </div>
+                                <LoginButton handleLogin={handleLogin} handleKeyPress={handleLogin}></LoginButton>
                                 <div className="col-md-12 text-center mt-4">
                                     <p className="text-muted">Start using your fingerprint</p>
                                     <a

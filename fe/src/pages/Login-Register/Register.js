@@ -130,7 +130,7 @@ const Register = () =>{
                                               }
                                         }
                                         />
-                                        {emailError && <div className="invalid-feedback" style={{fontSize:"16px"}}>{emailError}</div>}
+                                        {emailError && <div className="invalid-feedback" style={{fontSize:"16px",color:"red"}}>{emailError}</div>}
                                     </div>
                                 </div>
                                 <div className="col-md-6 mb-2">
