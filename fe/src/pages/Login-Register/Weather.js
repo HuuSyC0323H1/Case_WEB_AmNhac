@@ -16,8 +16,7 @@ const Weather = () => {
                 const response = await axios.get(
                     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${apiKey}&units=metric`
                 );
-                setWeather((prevWeather) => {
-                    console.log(prevWeather);
+                setWeather(() => {
                     return {
                         temperature: response.data.main.temp,
                         city: response.data.name,

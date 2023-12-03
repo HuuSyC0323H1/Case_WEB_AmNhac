@@ -14,19 +14,25 @@ import java.util.Set;
 @Setter
 public class Register {
     private String userName;
+    private String firstName;
+
+    private String lastName;
+
 //    (?=.*[a-z]): Yêu cầu ít nhất một chữ cái thường.
 //            (?=.*[A-Z]): Yêu cầu ít nhất một chữ cái in hoa.
 //            (?=.*\\d): Yêu cầu ít nhất một chữ số.
 //            (?=.*[@$!%*?&]): Yêu cầu ít nhất một ký tự đặc biệt từ danh sách @$!%*?&.
 //            [A-Za-z\\d@$!%*?&]{8,}: Yêu cầu một độ dài tối thiểu là 8 ký tự và có thể chứa chữ cái, số, và các ký tự đặc biệt từ danh sách.
     @Size(min = 8, message = "Password should be at least 8 characters long")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$", message = "Password must meet:<br/>" +
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[#?!@$%^&*-])[A-Za-z\\d@$!%*?&]{8,}$", message = "Password must meet:<br/>" +
             "- Requires at least one lowercase letter.<br/>" +
             "- Requires at least one capital letter.<br/>" +
             "- Requires at least one digit.<br/>" +
             "- Requires at least one special character from the list.<br/>" +
             "- Requires a minimum length of 8 characters and can contain letters, numbers, and special characters from the list")
     private String password;
+
+    private String confirmPassword;
 
     @Email(message = "Email should be valid")
     @Pattern(regexp = "(([^<>()\\[\\]\\\\.,;:\\s+@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@(gmail\\.com|example\\.com\\.vn|microsoft\\.com\\.vn)", message = "Email should end with @gmail.com")

@@ -80,7 +80,8 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody Register signUpRequest) {
-        if (userService.existsByUserName(signUpRequest.getUserName())) {
+        String userName = signUpRequest.getFirstName().toLowerCase() + signUpRequest.getLastName().toLowerCase();
+        if (userService.existsByUserName(userName)) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
 
@@ -88,9 +89,12 @@ public class UserController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        // Create new user's account
+        if (!signUpRequest.getPassword().equals(signUpRequest.getConfirmPassword())){
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Password do not match"));
+        }
+
         Users user = new Users();
-        user.setUserName(signUpRequest.getUserName());
+        user.setUserName(userName);
         user.setEmail(signUpRequest.getEmail());
         user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
         user.setUserStatus(true);
