@@ -2,8 +2,6 @@ package com.huusy.casespring3java17.model.account;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.huusy.casespring3java17.model.app.Friend;
-import com.huusy.casespring3java17.model.app.Post;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -60,12 +57,6 @@ public class Users {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "User_Role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Roles> listRoles = new HashSet<>();
-
-    @OneToMany(mappedBy = "users")
-    private List<Post> posts;
-
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private List<Friend> friends;
 
     public Users(String username, String email, String password) {
         this.userName = username;
